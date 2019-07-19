@@ -10,8 +10,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(FollowPath());
-        print("Back at Start.");
+        
     }
 
     IEnumerator FollowPath()
