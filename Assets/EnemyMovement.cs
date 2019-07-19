@@ -2,26 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
-{
+public class EnemyMovement : MonoBehaviour {
+
 
     [SerializeField] List<Waypoint> path;
 
 
-    void Start()
-    {
-        
-    }
-
     IEnumerator FollowPath()
     {
-        print("Start patrol...");
+        //print("Start patrol...");
         foreach (Waypoint waypoint in path)
         {
-            print("Visiting block: " + waypoint);
+            //print("Visiting block: " + waypoint);
             transform.position = waypoint.transform.position;
             yield return new WaitForSeconds(1f);
         }
-        print("End patrol.");
+        //print("End patrol.");
     }
 }

@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class CubeEditor : MonoBehaviour {
 
+
     Waypoint waypoint;
 
 
