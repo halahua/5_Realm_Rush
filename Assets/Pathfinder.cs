@@ -10,7 +10,8 @@ public class Pathfinder : MonoBehaviour {
 
     Dictionary<Vector2Int, Waypoint> grid = new Dictionary<Vector2Int, Waypoint>();
     Queue<Waypoint> queue = new Queue<Waypoint>();
-    [SerializeField] bool isRunning = true;
+    bool isRunning = true;
+    Waypoint searchCenter;
 
     Vector2Int[] directions = {
         Vector2Int.up,
@@ -31,43 +32,60 @@ public class Pathfinder : MonoBehaviour {
     private void Pathfind()
     {
         queue.Enqueue(startWaypoint);
-        while(queue.Count > 0)
+
+        while(queue.Count > 0 && isRunning)
         {
-            var searchCenter = queue.Dequeue();
-            print("Searching from: " + searchCenter);
-            HaltIfEndFound(searchCenter);
+            searchCenter = queue.Dequeue();
+            HaltIfEndFound();
+            ExploreNeighbours();
+            searchCenter.isExplored = true;
         }
         print("Finish pathfinding?");
     }
 
-    private void HaltIfEndFound(Waypoint searchCenter)
+    private void HaltIfEndFound()
     {
         if (searchCenter == endWaypoint)
         {
-            print("Searching from end node, therefore, stopping.");
             isRunning = false;
         }
     }
 
     void ExploreNeighbours()
     {
+        if(!isRunning) { return; }
+
         foreach (Vector2Int direction in directions)
         {
-            Vector2Int exploringCoordinates = startWaypoint.GetGridPos() + direction;
+            Vector2Int neighbourCoordinates = searchCenter.GetGridPos() + direction;
             try
             {
-                grid[exploringCoordinates].SetTopColor(Color.blue);
+                QueueNewNeighbours(neighbourCoordinates);
             }
             catch
             {
-                print("Skip coordenate " + exploringCoordinates + " for now.");
+                //print("Skip coordenate " + neighbourCoordinates + " for now.");
             }
         }
     }
 
-    private void ColorStartAndEnd()
+    private void QueueNewNeighbours(Vector2Int neighbourCoordinates)
     {
-        startWaypoint.SetTopColor(Color.magenta);
+        Waypoint neighbour = grid[neighbourCoordinates];
+        if (neighbour.isExplored || queue.Contains(neighbour))
+        {
+            //do nothing
+        }
+        else
+        {
+            queue.Enqueue(neighbour);
+            neighbour.exploredFrom = searchCenter;
+        }
+    }
+
+    public void ColorStartAndEnd()
+    {
+        startWaypoint.SetTopColor(Color.green);
         endWaypoint.SetTopColor(Color.red);
     }
 

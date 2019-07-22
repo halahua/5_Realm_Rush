@@ -326,7 +326,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58eb3b85f688ce546a6191413ce93679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: 10
 --- !u!114 &2691909310123673363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,6 +338,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0f9c9ea1f4851438094c429359da31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exploredColor: {r: 1, g: 0.5185516, b: 0, a: 0}
+  isExplored: 0
+  exploredFrom: {fileID: 0}
 --- !u!1 &3545510898360330870
 GameObject:
   m_ObjectHideFlags: 0
