@@ -111,7 +111,6 @@ public class Pathfinder : MonoBehaviour {
         }
     }
     
-
     private void LoadBlocks()
     { 
         var waypoints = FindObjectsOfType<Waypoint>();
