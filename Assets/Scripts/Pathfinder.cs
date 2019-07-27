@@ -48,8 +48,8 @@ public class Pathfinder : MonoBehaviour {
             SetAsPath(previous);
             previous = previous.exploredFrom;
         }
-        path.Reverse();
         SetAsPath(startWaypoint);
+        path.Reverse();
     }
 
     private void SetAsPath(Waypoint waypoint)
@@ -110,6 +110,7 @@ public class Pathfinder : MonoBehaviour {
             neighbour.exploredFrom = searchCenter;
         }
     }
+    
 
     private void LoadBlocks()
     { 

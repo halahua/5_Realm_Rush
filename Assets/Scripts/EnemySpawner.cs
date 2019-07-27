@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour {
         while (true)
         {
             Instantiate(enemyPrefab, transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(secondsBetweenSpawn); // aqui você pode referenciar o tempo que você quer usar no Inspector
+            yield return new WaitForSeconds(secondsBetweenSpawn); // aqui você pode referenciar o tempo que você usar no Inspector
         }
     }
 }
