@@ -10,7 +10,6 @@ public class EnemyDamage : MonoBehaviour {
     [SerializeField] ParticleSystem hitParticlePrefab;
     [SerializeField] ParticleSystem deathParticlePrefab;
 
-
     private void OnParticleCollision(GameObject other)
     {
         ProcessHit();
@@ -29,8 +28,14 @@ public class EnemyDamage : MonoBehaviour {
 
     void KillEnemy()
     {
-        var vxfDeathParticle = Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
-        vxfDeathParticle.Play();
+        // para falar com outro script, precisa referenciar ele!!!!!!!!!!
+        var enemySpawnerReference = FindObjectOfType<EnemySpawner>();
+
+        var deathVfx = Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
+        deathVfx.transform.parent = enemySpawnerReference.enemyParticlesParent.transform;
+        deathVfx.Play();
+
+        Destroy(deathVfx.gameObject, deathVfx.main.duration);
         Destroy(gameObject, 1f);
     }
 }

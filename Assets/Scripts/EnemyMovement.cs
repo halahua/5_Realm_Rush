@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour {
 
+    [SerializeField] float movementPeriod = .5f;
+    [SerializeField] ParticleSystem goalParticlePrefab;
 
     void Start()
     {
@@ -18,8 +20,21 @@ public class EnemyMovement : MonoBehaviour {
         foreach (Waypoint waypoint in path)
         {
             transform.position = waypoint.transform.position;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(movementPeriod);
         }
-        print("End patrol.");
+        EnemyReachedGoal();
+        print("Ending patrol...");
+    }
+
+    private void EnemyReachedGoal()
+    {
+        var enemySpawnerReference = FindObjectOfType<EnemySpawner>();
+
+        var goalVfx = Instantiate(goalParticlePrefab, transform.position, Quaternion.identity);
+        goalVfx.transform.parent = enemySpawnerReference.enemyParticlesParent.transform;
+        goalVfx.Play();
+
+        Destroy(goalVfx.gameObject, goalVfx.main.duration);
+        Destroy(gameObject, 1f);
     }
 }

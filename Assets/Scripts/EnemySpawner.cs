@@ -8,6 +8,8 @@ public class EnemySpawner : MonoBehaviour {
     [Range(0.1f, 120f)]
     [SerializeField] float secondsBetweenSpawn = 2f;
     [SerializeField] EnemyMovement enemyPrefab;
+    [SerializeField] Transform enemyParent;
+    public Transform enemyParticlesParent;
 
     private void Start()
     {
@@ -19,7 +21,9 @@ public class EnemySpawner : MonoBehaviour {
     {
         while (true)
         {
-            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            // para trabalhar com Instantiation você precisa declarar uma variável antes
+            var newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            newEnemy.transform.parent = enemyParent.transform;
             yield return new WaitForSeconds(secondsBetweenSpawn); // aqui você pode referenciar o tempo que você usar no Inspector
         }
     }
