@@ -4800,6 +4800,8 @@ MonoBehaviour:
   objectToPan: {fileID: 4966987339440530519}
   attackRange: 30
   projectileParticle: {fileID: 1266178046}
+  baseWaypoint: {fileID: 0}
+  towerShootingSFX: {fileID: 8300000, guid: fd0ecc3f8b7f0fb42854820564ab2c57, type: 3}
 --- !u!1001 &4963207488648384575
 PrefabInstance:
   m_ObjectHideFlags: 0
