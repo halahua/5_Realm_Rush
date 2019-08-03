@@ -35,6 +35,7 @@ public class EnemyDamage : MonoBehaviour {
         hitParticlePrefab.Play();
 
         audioSource.PlayOneShot(enemyHitSFX);
+        //Debug.Break();
     }
 
 
@@ -47,7 +48,8 @@ public class EnemyDamage : MonoBehaviour {
         deathVfx.transform.parent = enemySpawnerReference.enemyParticlesParent.transform;
         deathVfx.Play();
 
-        audioSource.PlayOneShot(enemyDeathSFX);
+        AudioSource.PlayClipAtPoint(enemyDeathSFX, Camera.main.transform.position);
+        //Debug.Break();
 
         Destroy(deathVfx.gameObject, deathVfx.main.duration);
         Destroy(gameObject, 1f);
